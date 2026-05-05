@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://c1twr2i6iwxt8"]
+
+[ext_resource type="Script" uid="uid://dchhhvhcnaqkp" path="res://mob.gd" id="1_nokgg"]
+[ext_resource type="Texture2D" uid="uid://bakeusoghm6iq" path="res://sprites/Boxer_Enemy.png" id="2_nokgg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p11y5"]
+radius = 5.056919
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubaqv"]
+atlas = ExtResource("2_nokgg")
+region = Rect2(0, 0, 98, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p11y5"]
+atlas = ExtResource("2_nokgg")
+region = Rect2(196, 0, 98, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5nov"]
+atlas = ExtResource("2_nokgg")
+region = Rect2(0, 0, 98, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3mxk"]
+atlas = ExtResource("2_nokgg")
+region = Rect2(98, 0, 98, 89)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1qmh0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubaqv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p11y5")
+}],
+"loop": true,
+"name": &"punch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5nov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3mxk")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfurk"]
+size = Vector2(54, 20)
+
+[node name="Boxer_Enemy" type="CharacterBody2D" unique_id=1292288999 groups=["mobs"]]
+collision_layer = 2
+script = ExtResource("1_nokgg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1749952457]
+position = Vector2(17, 7)
+scale = Vector2(5.7347174, 9.435253)
+shape = SubResource("CircleShape2D_p11y5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1491976890]
+sprite_frames = SubResource("SpriteFrames_1qmh0")
+animation = &"walk"
+
+[node name="PunchHitBox" type="Area2D" parent="." unique_id=727414735]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PunchHitBox" unique_id=944832802]
+position = Vector2(-21, -20)
+shape = SubResource("RectangleShape2D_gfurk")
