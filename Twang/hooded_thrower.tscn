@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cs1py532tst"]
+
+[ext_resource type="Script" uid="uid://bvbwxp1josy1k" path="res://hooded_thrower.gd" id="1_5hjqg"]
+[ext_resource type="Texture2D" uid="uid://b6tw38kawtl0w" path="res://sprites/Hooded_Thrower.png" id="1_vsj6k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5hjqg"]
+radius = 26.0
+height = 90.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r6uv"]
+atlas = ExtResource("1_vsj6k")
+region = Rect2(0, 0, 98, 119)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_421fs"]
+atlas = ExtResource("1_vsj6k")
+region = Rect2(196, 0, 98, 119)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_132lb"]
+atlas = ExtResource("1_vsj6k")
+region = Rect2(0, 0, 98, 119)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hm4iv"]
+atlas = ExtResource("1_vsj6k")
+region = Rect2(98, 0, 98, 119)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3g33x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r6uv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_421fs")
+}],
+"loop": true,
+"name": &"throw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_132lb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hm4iv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Hooded_Thrower" type="CharacterBody2D" unique_id=1422194256 groups=["mobs"]]
+collision_layer = 4
+script = ExtResource("1_5hjqg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=955997970]
+position = Vector2(10, 20)
+shape = SubResource("CapsuleShape2D_5hjqg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1712001022]
+sprite_frames = SubResource("SpriteFrames_3g33x")
+animation = &"throw"
+frame_progress = 0.66375446

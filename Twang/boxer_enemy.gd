@@ -9,10 +9,14 @@ var punch_cooldown = 0.0
 var punch_interval = 0.1
 var punch_cooldown_time = 1.5
 var move_speed = 60.0
-var punch_range = 100
-var detect_range = 200.0
+var punch_range = 100.0
+var detect_range = 350.0
 var hitbox_offset_x = 60.0
 var facing = 1
+var hp = 7
+var blink_timer = 0.0
+var blink_duration = 0.15
+var is_blinking = false
 
 enum State { IDLE, WALK, PUNCH_WINDUP, PUNCH_ACTIVE, PUNCH_RECOVER }
 var state = State.IDLE
@@ -29,6 +33,14 @@ func _ready():
 	punch_hitbox.body_entered.connect(_on_punch_hit)
 	punch_hitbox.position.x = hitbox_offset_x
 
+func _process(delta):
+	if is_blinking:
+		blink_timer += delta
+		if blink_timer >= blink_duration:
+			is_blinking = false
+			blink_timer = 0.0
+			anim.modulate = Color(1, 1, 1, 1)
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
@@ -44,7 +56,6 @@ func _physics_process(delta):
 	var distance = global_position.distance_to(player.global_position)
 	var is_punching = state in [State.PUNCH_WINDUP, State.PUNCH_ACTIVE, State.PUNCH_RECOVER]
 
-	# Only update facing when not punching
 	if not is_punching:
 		if player.global_position.x > global_position.x:
 			facing = 1
@@ -61,13 +72,11 @@ func _physics_process(delta):
 			punch_hitbox.monitoring = false
 			if distance <= punch_range and punch_cooldown <= 0:
 				punch_timer += delta
-				##print("IDLE punch building | facing: ", facing, " | dist: ", distance, " | timer: ", punch_timer)
 				if punch_timer >= punch_interval:
 					punch_timer = 0.0
 					_enter_state(State.PUNCH_WINDUP)
 			elif distance <= detect_range:
 				_enter_state(State.WALK)
-			##print("Current state: IDLE | facing: ", facing, " | dist: ", distance, " | cooldown: ", punch_cooldown)
 
 		State.WALK:
 			punch_hitbox.monitoring = false
@@ -79,21 +88,18 @@ func _physics_process(delta):
 				anim.play("walk")
 			else:
 				_enter_state(State.IDLE)
-			##print("Current state: WALK | facing: ", facing, " | dist: ", distance, " | cooldown: ", punch_cooldown)
 
 		State.PUNCH_WINDUP:
 			velocity.x = 0
 			punch_hitbox.monitoring = false
 			if state_timer >= WINDUP_TIME:
 				_enter_state(State.PUNCH_ACTIVE)
-			##print("Current state: PUNCH_WINDUP | facing: ", facing, " | timer: ", state_timer)
 
 		State.PUNCH_ACTIVE:
 			velocity.x = 0
 			punch_hitbox.monitoring = true
 			if state_timer >= ACTIVE_TIME:
 				_enter_state(State.PUNCH_RECOVER)
-			##print("Current state: PUNCH_ACTIVE | facing: ", facing, " | timer: ", state_timer)
 
 		State.PUNCH_RECOVER:
 			velocity.x = 0
@@ -104,7 +110,6 @@ func _physics_process(delta):
 					_enter_state(State.IDLE)
 				else:
 					_enter_state(State.WALK)
-			##print("Current state: PUNCH_RECOVER | facing: ", facing, " | timer: ", state_timer)
 
 	move_and_slide()
 
@@ -118,19 +123,18 @@ func _enter_state(new_state):
 			anim.play("walk")
 		State.PUNCH_WINDUP:
 			anim.play("punch")
-			##print("Boxer punching!")
-		##State.PUNCH_ACTIVE:
-			##print("Hitbox ON")
-		##State.PUNCH_RECOVER:
-			##print("Hitbox OFF")
 
 func _on_punch_hit(body):
 	if body.is_in_group("player"):
-		##print("Punch hit player!")
 		body.take_damage()
 
-# TODO: Add mob health and damage system when player weapon is implemented
-# func take_hit(damage):
-# 	hp -= damage
-# 	if hp <= 0:
-# 		queue_free()
+func take_hit(damage):
+	hp -= damage
+	blink()
+	if hp <= 0:
+		queue_free()
+
+func blink():
+	is_blinking = true
+	blink_timer = 0.0
+	anim.modulate = Color(1, 0.3, 0.3, 1)

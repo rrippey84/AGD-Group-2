@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bm8c2sgnu1fnx"]
+
+[ext_resource type="Script" uid="uid://bj8fublv71d7x" path="res://thrower_projectile.gd" id="1_4thqu"]
+[ext_resource type="Texture2D" uid="uid://b15bpoq4wvqly" path="res://sprites/Hooded_Thrower_Projectile.png" id="2_2leb1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3tlf"]
+radius = 20.0
+
+[node name="ThrowerProjectile" type="Area2D" unique_id=855508988]
+script = ExtResource("1_4thqu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=692806240]
+shape = SubResource("CircleShape2D_i3tlf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=670595636]
+texture = ExtResource("2_2leb1")
