@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://t0eiayj4g1dl" path="res://boxer_enemy.gd" id="1_7wbht"]
 [ext_resource type="Texture2D" uid="uid://cobq28ita0ibv" path="res://Assets/Boxer_Enemy.png" id="2_vibo4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p11y5"]
-radius = 5.056919
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wbht"]
+size = Vector2(6.781315, 9.537359)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ubaqv"]
 atlas = ExtResource("2_vibo4")
@@ -53,28 +53,28 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfurk"]
-size = Vector2(54, 20)
+size = Vector2(90.85727, 20)
 
 [node name="Boxer_Enemy" type="CharacterBody2D" unique_id=1292288999 groups=["mobs"]]
+scale = Vector2(0.35999972, 0.35999972)
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_7wbht")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1749952457]
-position = Vector2(17, 7)
-scale = Vector2(5.7347174, 9.435253)
-shape = SubResource("CircleShape2D_p11y5")
+position = Vector2(19.44446, 6.9444494)
+scale = Vector2(5.7347174, 7.863818)
+shape = SubResource("RectangleShape2D_7wbht")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1491976890]
 sprite_frames = SubResource("SpriteFrames_1qmh0")
-animation = &"walk"
+animation = &"punch"
 
 [node name="PunchHitBox" type="Area2D" parent="." unique_id=727414735]
 collision_layer = 2
-collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PunchHitBox" unique_id=944832802]
-position = Vector2(-21, -20)
+position = Vector2(-2.77778, -11.11112)
 shape = SubResource("RectangleShape2D_gfurk")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1594147333]

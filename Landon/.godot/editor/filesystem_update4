@@ -1,10 +1,9 @@
-res://Character.tscn
-res://Character.gd
-res://test.tscn
-res://Level1.tscn
-res://Camera2D.gd
-res://thrower_projectile.tscn
 res://hooded_thrower.tscn
-res://boxer_enemy.tscn
+res://thrower_projectile.tscn
+res://Level1.tscn
 res://hooded_thrower.gd
-res://level_1.gd
+res://thrower_projectile.gd
+res://Character.gd
+res://boxer_enemy.tscn
+res://boxer_enemy.gd
+res://Character.tscn

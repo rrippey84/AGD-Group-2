@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" uid="uid://qww6yldlgjw8" path="res://hooded_thrower.gd" id="1_5hjqg"]
 [ext_resource type="Texture2D" uid="uid://bsvqposlw7vg7" path="res://Assets/Hooded_Thrower.png" id="1_vsj6k"]
-[ext_resource type="PackedScene" uid="uid://bm8c2sgnu1fnx" path="res://thrower_projectile.tscn" id="3_3r6uv"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5hjqg"]
-radius = 26.0
-height = 90.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hjqg"]
+size = Vector2(41.666794, 80.5558)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3r6uv"]
 atlas = ExtResource("1_vsj6k")
@@ -55,13 +53,14 @@ animations = [{
 }]
 
 [node name="Hooded_Thrower" type="CharacterBody2D" unique_id=1422194256 groups=["mobs"]]
+scale = Vector2(0.3599989, 0.3599989)
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_5hjqg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=955997970 groups=["mobs"]]
-position = Vector2(10, 20)
-shape = SubResource("CapsuleShape2D_5hjqg")
+position = Vector2(20.833397, 18.055613)
+shape = SubResource("RectangleShape2D_5hjqg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1712001022]
 sprite_frames = SubResource("SpriteFrames_3g33x")
@@ -69,5 +68,3 @@ animation = &"throw"
 frame_progress = 0.66375446
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=192035413]
-
-[node name="ThrowerProjectile" parent="." unique_id=855508988 instance=ExtResource("3_3r6uv")]

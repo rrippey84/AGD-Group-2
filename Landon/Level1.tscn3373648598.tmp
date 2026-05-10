@@ -2707,39 +2707,29 @@ tile_set = SubResource("TileSet_lmyl5")
 [node name="Character" parent="test" unique_id=162804027 groups=["player"] instance=ExtResource("3_cove1")]
 position = Vector2(126, 159)
 
+[node name="Boxer_Enemy" parent="test" unique_id=1292288999 instance=ExtResource("5_lmyl5")]
+position = Vector2(1994, 68)
+scale = Vector2(0.44775093, 0.44775093)
+
+[node name="Boxer_Enemy2" parent="test" unique_id=586173531 instance=ExtResource("5_lmyl5")]
+position = Vector2(1685, 55)
+scale = Vector2(0.4477507, 0.4477507)
+
 [node name="NavigationRegion2D2" type="NavigationRegion2D" parent="test" unique_id=769524970]
 position = Vector2(-8, 23.000002)
 navigation_polygon = SubResource("NavigationPolygon_s3sxq")
 
-[node name="Hooded_Thrower2" parent="test" unique_id=1520184423 instance=ExtResource("6_mlbie")]
-position = Vector2(659, 145)
-
-[node name="Boxer_Enemy" parent="test" unique_id=1292288999 instance=ExtResource("5_lmyl5")]
-position = Vector2(1094, 83)
-
-[node name="Boxer_Enemy3" parent="test" unique_id=1736350803 instance=ExtResource("5_lmyl5")]
-position = Vector2(1331, 147)
-
-[node name="Hooded_Thrower3" parent="test" unique_id=385860547 instance=ExtResource("6_mlbie")]
-position = Vector2(1388, 144)
-
-[node name="Hooded_Thrower4" parent="test" unique_id=189683578 instance=ExtResource("6_mlbie")]
-position = Vector2(2147, 11.000002)
-
-[node name="Hooded_Thrower5" parent="test" unique_id=1318580236 instance=ExtResource("6_mlbie")]
-position = Vector2(2202, 9.000002)
-
-[node name="Boxer_Enemy5" parent="test" unique_id=1914745880 instance=ExtResource("5_lmyl5")]
-position = Vector2(1966, 127)
-
-[node name="Boxer_Enemy6" parent="test" unique_id=278694448 instance=ExtResource("5_lmyl5")]
-position = Vector2(2539, 127)
-
-[node name="Boxer_Enemy7" parent="test" unique_id=1542412927 instance=ExtResource("5_lmyl5")]
-position = Vector2(2352, 126)
-
-[node name="Boxer_Enemy2" parent="test" unique_id=1480895422 instance=ExtResource("5_lmyl5")]
-position = Vector2(292, 146)
-
 [node name="Marker2D" type="Marker2D" parent="." unique_id=40647270]
 position = Vector2(3041, 140)
+
+[node name="Hooded_Thrower" parent="." unique_id=1422194256 instance=ExtResource("6_mlbie")]
+position = Vector2(718, 20.000015)
+
+[node name="Hooded_Thrower2" parent="." unique_id=1040969803 instance=ExtResource("6_mlbie")]
+position = Vector2(1055, 67)
+
+[node name="Hooded_Thrower3" parent="." unique_id=1991957636 instance=ExtResource("6_mlbie")]
+position = Vector2(797, 20)
+
+[node name="Boxer_Enemy" parent="." unique_id=1934485610 instance=ExtResource("5_lmyl5")]
+position = Vector2(224, 140.00002)
