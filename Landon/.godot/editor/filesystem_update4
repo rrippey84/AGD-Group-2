@@ -1,9 +1,4 @@
-res://hooded_thrower.tscn
-res://thrower_projectile.tscn
-res://Level1.tscn
-res://hooded_thrower.gd
-res://thrower_projectile.gd
-res://Character.gd
 res://boxer_enemy.tscn
 res://boxer_enemy.gd
-res://Character.tscn
+res://thrower_projectile.tscn
+res://thrower_projectile.gd

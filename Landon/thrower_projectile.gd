@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 200.0
+var speed = 150.0
 var direction = 1
 var spin_speed = 720.0
 var active = false
