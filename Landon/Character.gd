@@ -22,10 +22,14 @@ var attack_time := 0.0
 @onready var anim_player  : AnimationPlayer  = $AnimationPlayer
 @onready var attack_area  : Area2D           = $"Attack Area"
 @onready var attack_shape : CollisionShape2D = $"Attack Area/CollisionShape2D"
+@onready var agent: NavigationAgent2D = $NavigationAgent2D
+
 func _ready() -> void:
 	attack_area.monitoring = false
 	attack_shape.disabled  = true
 	_update_facing()
+	agent.target_position = global_position  # start at current position
+
 func _physics_process(delta: float) -> void:
 	var ix  := int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	var run := Input.is_action_pressed("Run")
@@ -68,6 +72,9 @@ func _physics_process(delta: float) -> void:
 			if not attacking:
 				velocity.x = 0.0
 				state = State.IDLE
+	# var next_point = agent.get_next_path_position()
+	# var direction = (next_point - global_position).normalized()
+	# velocity = direction * SPEED_RUN  # or SPEED_WALK depending on your state
 	move_and_slide()
 	if is_on_floor():
 		if state == State.JUMP or state == State.FALL:
@@ -111,3 +118,8 @@ func _update_anim(running: bool) -> void:
 	if anim_player.current_animation != anim:
 		anim_player.play(anim)
 	anim_player.speed_scale = speed
+
+
+func _on_attack_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("mobs"):
+		area.take_hit(1)

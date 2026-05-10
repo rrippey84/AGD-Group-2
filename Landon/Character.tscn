@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://f0gjtjw02guj"]
 
-[ext_resource type="Texture2D" uid="uid://cm5ocdxil1b2k" path="res://Assets/Walk.png" id="1_7ig0a"]
-[ext_resource type="Texture2D" uid="uid://bmiwv3omo7bdr" path="res://Assets/Jump.png" id="1_lcuhw"]
-[ext_resource type="Texture2D" uid="uid://bgc5rnosrxm5t" path="res://Assets/Attack.png" id="1_oolk3"]
+[ext_resource type="Texture2D" uid="uid://cv8rbuuawq2h3" path="res://Assets/Walk.png" id="1_7ig0a"]
+[ext_resource type="Texture2D" uid="uid://bed76862b58ae" path="res://Assets/Jump.png" id="1_lcuhw"]
+[ext_resource type="Texture2D" uid="uid://4s1ix0mo03bg" path="res://Assets/Attack.png" id="1_oolk3"]
 [ext_resource type="Script" uid="uid://1ohhkj3dcykn" path="res://Character.gd" id="1_script"]
 
 [sub_resource type="Animation" id="Animation_7ig0a"]
@@ -183,6 +183,7 @@ size = Vector2(23, 16)
 size = Vector2(16, 34)
 
 [node name="Character" type="CharacterBody2D" unique_id=162804027]
+collision_mask = 7
 script = ExtResource("1_script")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1360335169]
@@ -197,14 +198,21 @@ autoplay = &"Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=180772603]
 shape = SubResource("RectangleShape2D_7ig0a")
 
-[node name="Attack Area" type="Area2D" parent="." unique_id=2114947995]
+[node name="Attack Area" type="Area2D" parent="." unique_id=2114947995 groups=["player"]]
+collision_layer = 8
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Area" unique_id=2130751065]
 position = Vector2(19.5, -8)
 shape = SubResource("RectangleShape2D_lcuhw")
 disabled = true
 
-[node name="Enemy Area" type="Area2D" parent="." unique_id=555424171]
+[node name="Enemy Area" type="Area2D" parent="." unique_id=555424171 groups=["player"]]
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Area" unique_id=1240808075]
 shape = SubResource("RectangleShape2D_atbvg")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1233541627]
+
+[connection signal="area_entered" from="Attack Area" to="." method="_on_attack_area_area_entered"]
